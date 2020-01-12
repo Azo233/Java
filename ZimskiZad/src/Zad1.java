@@ -12,7 +12,7 @@ public class Zad1 {
         
 		int [] niz = new int[a];
 		
-		for (int i=1;i<a;i++) {
+		for (int i=0;i<a;i++) {
 			
 			niz[i]=Integer.parseInt(JOptionPane.showInputDialog("Unesi broj na mjesto:" + (i)));
 			
