@@ -21,10 +21,10 @@ public class FiksniTelefon extends Entitet {
     private int cijena;
     private int min;
 
-    public int getCijena() {
+    public float getCijena() {
         return cijena;
     }
-
+   
     public void setCijena(int cijena) {
         this.cijena = cijena;
     }

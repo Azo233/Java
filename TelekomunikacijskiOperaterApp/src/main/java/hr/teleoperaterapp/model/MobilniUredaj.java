@@ -21,19 +21,21 @@ import javax.persistence.OneToOne;
 public class MobilniUredaj extends Entitet {
      
     
-    private String marka;
+    private String brand;
     private int cijena;
     private String os;
     @OneToOne
     private  MobilnaTarifa mobilnatarifa;
 
-    public String getMarka() {
-        return marka;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setMarka(String marka) {
-        this.marka = marka;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
+
+   
 
     public int getCijena() {
         return cijena;

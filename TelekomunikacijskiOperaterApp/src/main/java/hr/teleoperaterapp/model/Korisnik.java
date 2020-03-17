@@ -22,6 +22,7 @@ public class Korisnik extends Entitet {
     
     private String ime;
     private String prezime;
+    private String Oib;
     
     @ManyToOne
     private  MobilnaTarifa mobilnatarifa;
@@ -50,6 +51,21 @@ public class Korisnik extends Entitet {
         this.prezime = prezime;
     }
 
+    public String getOib() {
+        return Oib;
+    }
+
+    public void setOib(String Oib) {
+        this.Oib = Oib;
+    }
+
+    public MobilnaTarifa getMobilnatarifa() {
+        return mobilnatarifa;
+    }
+
+    public void setMobilnatarifa(MobilnaTarifa mobilnatarifa) {
+        this.mobilnatarifa = mobilnatarifa;
+    }
 
     public MobilniUredaj getMobilniuredaj() {
         return mobilniuredaj;
@@ -82,6 +98,9 @@ public class Korisnik extends Entitet {
     public void setInternet(Internet internet) {
         this.internet = internet;
     }
+
+   
+    
 
    
 
