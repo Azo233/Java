@@ -11,6 +11,7 @@ import hr.teleoperaterapp.model.MobilnaTarifa;
 import hr.teleoperaterapp.util.HibernateUtil;
 import hr.teleoperaterapp.util.OperaterException;
 import hr.teleoperaterapp.util.Pomocno;
+import hr.teleoperaterapp.view.SplashScreen;
 import org.hibernate.Session;
 
 /**
@@ -22,7 +23,8 @@ public class Start {
     public Start(){
         
         //HibernateUtil.getSessionFactory().openSession();
-       Pomocno.pocetniInstert();
+       Pomocno.pocetniInsert();
+        new SplashScreen().setVisible(true);
      
         
     }

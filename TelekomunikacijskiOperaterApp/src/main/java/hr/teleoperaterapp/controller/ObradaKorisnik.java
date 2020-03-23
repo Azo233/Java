@@ -9,6 +9,7 @@ package hr.teleoperaterapp.controller;
 import hr.teleoperaterapp.model.Korisnik;
 import hr.teleoperaterapp.util.OperaterException;
 import hr.teleoperaterapp.util.Pomocno;
+import java.util.List;
 
 
 
@@ -55,6 +56,11 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
      if(!Pomocno.isOibValjan(entitet.getOib())){
             throw new  OperaterException("OIB nije valjan");
         }
+    }
+
+    @Override
+    public List<X> getPodatci() {
+         return session.createQuery("from Korisnik").list();
     }
 
    

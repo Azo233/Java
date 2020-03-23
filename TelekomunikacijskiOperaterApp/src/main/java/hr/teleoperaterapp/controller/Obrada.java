@@ -8,6 +8,8 @@ package hr.teleoperaterapp.controller;
 import hr.teleoperaterapp.util.HibernateUtil;
 import hr.teleoperaterapp.util.OperaterException;
 import org.hibernate.Session;
+import java.util.List;
+
 
 /**
  *
@@ -20,11 +22,18 @@ public abstract class Obrada<X> {
     protected abstract void kontrolaCreate() throws OperaterException;
     protected abstract void kontrolaUpdate() throws OperaterException;
     protected abstract void kontrolaSave () throws OperaterException;
+    public abstract List<X> getPodatci();
+
+    public Obrada() {
+        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
     
     
     public Obrada (X entitet){
+        this();
         this.entitet=entitet;
-        session = HibernateUtil.getSessionFactory().openSession();
+        
     }
     
      public X create() throws OperaterException{

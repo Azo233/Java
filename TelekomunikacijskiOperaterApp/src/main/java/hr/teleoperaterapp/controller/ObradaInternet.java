@@ -7,6 +7,7 @@ package hr.teleoperaterapp.controller;
 
 import hr.teleoperaterapp.model.Internet;
 import hr.teleoperaterapp.util.OperaterException;
+import java.util.List;
 
 
 /**
@@ -55,6 +56,11 @@ public class ObradaInternet extends Obrada<Internet> {
         if (entitet.getCijena()==0){
             throw new OperaterException("Cijena obavezna");
         }
+    }
+
+    @Override
+    public List<Internet> getPodatci() {
+         return session.createQuery("from Internet").list();
     }
     
 }

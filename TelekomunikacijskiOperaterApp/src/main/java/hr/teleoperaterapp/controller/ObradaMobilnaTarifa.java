@@ -7,6 +7,7 @@ package hr.teleoperaterapp.controller;
 
 import hr.teleoperaterapp.model.MobilnaTarifa;
 import hr.teleoperaterapp.util.OperaterException;
+import java.util.List;
 
 
 /**
@@ -67,6 +68,11 @@ public class ObradaMobilnaTarifa extends Obrada<MobilnaTarifa> {
             throw new OperaterException("Sms_min obavezno");
         }
      
+    }
+
+    @Override
+    public List<MobilnaTarifa> getPodatci() {
+         return session.createQuery("from MobilnaTarifa").list();
     }
 
     

@@ -11,13 +11,16 @@ import hr.teleoperaterapp.controller.ObradaFiksniTelefon;
 import hr.teleoperaterapp.controller.ObradaInternet;
 import hr.teleoperaterapp.controller.ObradaTv;
 import hr.teleoperaterapp.controller.ObradaKorisnik;
+import hr.teleoperaterapp.controller.ObradaOperater;
 import hr.teleoperaterapp.model.FiksniTelefon;
 import hr.teleoperaterapp.model.Internet;
 import hr.teleoperaterapp.model.Korisnik;
 import hr.teleoperaterapp.model.MobilnaTarifa;
 import hr.teleoperaterapp.model.MobilniUredaj;
+import hr.teleoperaterapp.model.Operater;
 import hr.teleoperaterapp.model.Tv;
 import java.math.BigDecimal;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -25,97 +28,34 @@ import java.math.BigDecimal;
  */
 public class Pomocno {
     
-    
-    public static void pocetniInstert(){
-       MobilnaTarifa Mt =new MobilnaTarifa();
-            Mt.setNaziv("Svima svega");
-            Mt.setPodatkovi_promet(20500 );
-            Mt.setSms_min(2000);
-            Mt.setCijena(150);
-           ObradaMobilnaTarifa obradaMobilnaTarifa=new ObradaMobilnaTarifa(Mt);
-             try {
-            obradaMobilnaTarifa.create();
-        } catch (OperaterException Oe) {
-                 System.out.println(Oe.getPoruka());
-        }
-             
-             
-         
-             MobilniUredaj Mu= new MobilniUredaj();
-             Mu.setBrand("Samsung");
-             Mu.setCijena(5000);
-             Mu.setOs("Android 10");
-             Mu.setMobilnatarifa(Mt); 
-            ObradaMobilniUredaj obradaMobilniUredaj=new ObradaMobilniUredaj(Mu);
-            try {
-            obradaMobilniUredaj.create();
-        } catch (OperaterException Oe) {
-                System.out.println(Oe.getPoruka());
-        }
-            
-            
-      
-         FiksniTelefon Ft=new FiksniTelefon();
-         Ft.setCijena(80);
-         Ft.setMin(2000);
-         ObradaFiksniTelefon obradaFiksniTelefon=new ObradaFiksniTelefon(Ft);
-         try {
-            obradaFiksniTelefon.create();
-        } catch (OperaterException Oe) {
-             System.out.println(Oe.getPoruka());
-        }
-         
-         
-         
-        Internet I=new Internet();
-        I.setFlatInterent(true);
-        I.setPokucniInternet(false);
-        I.setCijena(150);
-        ObradaInternet obradaInternet=new ObradaInternet(I);
-         try {
-          obradaInternet.create();
-        } catch (OperaterException Oe) {
-             System.out.println(Oe.getPoruka());
-        }
-         
-         
-         
-        Tv tv=new Tv();
-        tv.setFilmskiKanali(true);
-        tv.setSportskiKanali(true);
-        tv.setCijena(120);
-        ObradaTv obradaTv=new ObradaTv(tv);
-        try {
-            obradaTv.create();
-            
-        } catch (OperaterException Oe) {
-            System.out.println(Oe.getPoruka());
-        }
-        
-        
-        
-        Korisnik K=new Korisnik();
-        K.setIme("Petar");
-        K.setPrezime("Marković");
-        K.setOib("56460803073");
-        K.setMobilnatarifa(Mt);
-        K.setMobilniuredaj(Mu);
-        K.setFiksnitelefon(Ft);
-        K.setInternet(I);
-        K.setTv(tv);
-        ObradaKorisnik obradaKorisnik=new ObradaKorisnik(K);
-        try {
-            obradaKorisnik.create();
-        } catch (OperaterException Oe) {
-            System.out.println(Oe.getPoruka());
-        }
-        
-        
-        
-          
-          
-         
+     public static String getNazivAplikacije(){
+        return "Telekomunikacijski Operater App";
     }
+     
+    public static void pocetniInsert(){
+        
+        
+        Operater o = new Operater();
+        o.setEmail("azinic@gmail.com");
+        o.setLozinka(BCrypt.hashpw("a", BCrypt.gensalt()));
+        
+        
+        ObradaOperater obradaOperater = new ObradaOperater(o);
+        try {
+            obradaOperater.create();
+        } catch (OperaterException op) {
+            System.out.println(op.getPoruka());
+        }
+    }
+    
+    
+        
+        
+        
+          
+          
+         
+    
     public static boolean isOibValjan(String oib) {
         
         if(oib==null){

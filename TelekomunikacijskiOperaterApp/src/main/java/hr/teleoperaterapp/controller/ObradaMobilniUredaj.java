@@ -7,6 +7,7 @@ package hr.teleoperaterapp.controller;
 
 import hr.teleoperaterapp.model.MobilniUredaj;
 import hr.teleoperaterapp.util.OperaterException;
+import java.util.List;
 
 
 /**
@@ -61,6 +62,11 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
             throw new OperaterException("Ime mora imati manje od 20 znakova");
         }
         
+    }
+
+    @Override
+    public List<MobilniUredaj> getPodatci() {
+        return session.createQuery("from MobilniUredaj").list();
     }
     
 }

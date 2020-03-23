@@ -7,6 +7,7 @@ package hr.teleoperaterapp.controller;
 
 import hr.teleoperaterapp.model.Tv;
 import hr.teleoperaterapp.util.OperaterException;
+import java.util.List;
 
 
 /**
@@ -56,6 +57,11 @@ public class ObradaTv extends Obrada<Tv> {
          if(entitet.isFilmskiKanali()!=true && entitet.isFilmskiKanali()!=false){
             throw new OperaterException("Obavezno true ili false");
         }
+    }
+
+    @Override
+    public List<Tv> getPodatci() {
+         return session.createQuery("from Tv").list();
     }
   
 

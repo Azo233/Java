@@ -7,6 +7,7 @@ package hr.teleoperaterapp.controller;
 
 import hr.teleoperaterapp.model.FiksniTelefon;
 import hr.teleoperaterapp.util.OperaterException;
+import java.util.List;
 
 
 
@@ -52,6 +53,11 @@ public class ObradaFiksniTelefon extends Obrada<FiksniTelefon>{
         if (entitet.getMin()==0){
             throw new OperaterException("Min obavezno");
         }
+    }
+
+    @Override
+    public List<FiksniTelefon> getPodatci() {
+         return session.createQuery("from FiksniTelefon").list();
     }
 
     
