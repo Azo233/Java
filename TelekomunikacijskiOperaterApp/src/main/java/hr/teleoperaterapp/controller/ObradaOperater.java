@@ -5,7 +5,7 @@
  */
 package hr.teleoperaterapp.controller;
 
-import hr.teleoperaterapp.controller.Obrada;
+
 import hr.teleoperaterapp.model.Operater;
 import hr.teleoperaterapp.util.OperaterException;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class ObradaOperater extends Obrada<Operater> {
 
-
+    
  
    public ObradaOperater(Operater entitet) {
         super(entitet);
@@ -30,9 +30,9 @@ public class ObradaOperater extends Obrada<Operater> {
 
   
     
-    public Operater autoriziraj(String email, String lozinka){
+  public Operater autoriziraj(String email, String lozinka){
         
-        List<Operater> lista= session.createQuery(" from Operater o "
+         List<Operater> lista= session.createQuery(" from Operater o "
         + " where o.email=:email ")
               .setParameter("email", email).list();
         if(lista==null || lista.isEmpty()){
@@ -47,8 +47,19 @@ public class ObradaOperater extends Obrada<Operater> {
     }
 
 
+  
+
+   
+    
+    @Override
+    public List<Operater> getPodatci() {
+         return session.createQuery("from Operater").list();
+    }
+
+    @Override
     protected void kontrolaCreate() throws OperaterException {
-        kontrolaEmail();
+      
+       kontrolaEmail();
        kontrolaLozinka();
     }
 
@@ -58,26 +69,26 @@ public class ObradaOperater extends Obrada<Operater> {
     }
 
     @Override
-    protected void kontrolaSave() throws OperaterException {
+    protected void kontrolaDelete() throws OperaterException {
        
     }
 
+
     @Override
-    public List<Operater> getPodatci() {
-        return session.createQuery("from Operater").list();
+    protected void nakonSpremanja() throws OperaterException {
+        
+    }
+    
+     private void kontrolaEmail() throws OperaterException{
+         if(entitet.getEmail()==null||entitet.getEmail().trim().length()==0){
+           throw new OperaterException("Email obavezno");
+       }
     }
 
-    private void kontrolaEmail() throws OperaterException {
-        if (entitet.getEmail()==null|| entitet.getLozinka().trim().length()==0){
-            throw new OperaterException("email obavezan");
-        }
-    }
-
-    private void kontrolaLozinka() throws OperaterException {
-         if(entitet.getLozinka()==null || entitet.getLozinka().trim().length()==0){
-            throw new OperaterException("Obavezno lozinka");
-    }
-
+    private void kontrolaLozinka() throws OperaterException{
+        if(entitet.getLozinka()==null || BCrypt.checkpw("", entitet.getLozinka())){
+            throw new OperaterException("Obavezno lozinka");  
+           }
     }
 }
   

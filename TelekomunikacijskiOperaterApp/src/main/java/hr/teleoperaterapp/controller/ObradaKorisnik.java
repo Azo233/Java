@@ -34,10 +34,7 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
        
     }
 
-    @Override
-    protected void kontrolaSave() throws OperaterException {
-       
-    }
+   
 
     private void kontrolaIme() throws OperaterException {
         if(entitet.getIme().length()>20){
@@ -61,6 +58,16 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
     @Override
     public List<X> getPodatci() {
          return session.createQuery("from Korisnik").list();
+    }
+
+    @Override
+    protected void kontrolaDelete() throws OperaterException {
+        
+    }
+
+    @Override
+    protected void nakonSpremanja() throws OperaterException {
+       
     }
 
    

@@ -5,6 +5,7 @@
  */
 package hr.teleoperaterapp.controller;
 
+import hr.teleoperaterapp.model.Korisnik;
 import hr.teleoperaterapp.model.Tv;
 import hr.teleoperaterapp.util.OperaterException;
 import java.util.List;
@@ -19,6 +20,15 @@ public class ObradaTv extends Obrada<Tv> {
     public ObradaTv(Tv entitet) {
         super(entitet);
     }
+
+    public ObradaTv() {
+    }
+    
+    @Override
+    public List<Tv> getPodatci() {
+         return session.createQuery("from Tv").list();
+    }
+    
     
     
 
@@ -27,46 +37,65 @@ public class ObradaTv extends Obrada<Tv> {
         kontrolaCijena();
         kontrolaSportskiKanali();
         kontrolaFilmskiKanali();
+        kontrolaIstiNaziv();
+        
     }
     
  
     @Override
     protected void kontrolaUpdate() throws OperaterException {
-        
-    }
-
-    @Override
-    protected void kontrolaSave() throws OperaterException {
-        
+        kontrolaDuzinaNaziv();
     }
 
     private void kontrolaCijena() throws OperaterException{
-         if(entitet.getCijena()==0){
+         if(entitet.getCijena()==null){
             throw new OperaterException("Cijena obavezna");
         }
     }
 
     private void kontrolaSportskiKanali() throws OperaterException {
-         if(entitet.isSportskiKanali()!=true && entitet.isSportskiKanali()!=false){
+         if(entitet.getSportskiKanali()!=true && entitet.getSportskiKanali()!=false){
             throw new OperaterException("Obavezno true ili false");
         }
     }
 
     private void kontrolaFilmskiKanali() throws OperaterException{
         
-         if(entitet.isFilmskiKanali()!=true && entitet.isFilmskiKanali()!=false){
+         if(entitet.getFilmskiKanali()!=true && entitet.getFilmskiKanali()!=false){
             throw new OperaterException("Obavezno true ili false");
         }
     }
 
-    @Override
-    public List<Tv> getPodatci() {
-         return session.createQuery("from Tv").list();
+    private void kontrolaDuzinaNaziv()throws OperaterException {
+        
+        if(entitet.getNaziv().length()>50){
+          throw new OperaterException("Naziv mora biti manji od 50 znakova");
+      }  
+        
+        
     }
-  
 
+    private void kontrolaIstiNaziv() throws OperaterException {
+        
+        Long ukupno = (Long)session
+            .createQuery(" select count(t) from Tv t "
+                    + " where t.naziv=:naziv")
+              .setParameter("naziv", entitet.getNaziv())
+              .uniqueResult();
+      if(ukupno>0){
+          throw  new OperaterException("Naziv postoji u bazi, odaberite drugi");
+      }  
+    }
     
+     @Override
+    protected void nakonSpremanja() throws OperaterException {
+       
+    }
+     @Override
+    protected void kontrolaDelete() throws OperaterException {
+       
+      
+    }
 
-   
     
 }

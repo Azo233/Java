@@ -34,10 +34,7 @@ public class ObradaMobilnaTarifa extends Obrada<MobilnaTarifa> {
         
     }
 
-    @Override
-    protected void kontrolaSave() throws OperaterException {
-      
-    }
+  
 
     private void kontrolaCijena() throws OperaterException {
         if(entitet.getCijena()==0){
@@ -73,6 +70,16 @@ public class ObradaMobilnaTarifa extends Obrada<MobilnaTarifa> {
     @Override
     public List<MobilnaTarifa> getPodatci() {
          return session.createQuery("from MobilnaTarifa").list();
+    }
+
+    @Override
+    protected void kontrolaDelete() throws OperaterException {
+       
+    }
+
+    @Override
+    protected void nakonSpremanja() throws OperaterException {
+      
     }
 
     

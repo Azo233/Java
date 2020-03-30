@@ -34,10 +34,6 @@ public class ObradaInternet extends Obrada<Internet> {
         
     }
 
-    @Override
-    protected void kontrolaSave() throws OperaterException {
-        
-    }
 
     private void kontolaFlatInternet() throws OperaterException{
         if(entitet.isFlatInterent()!=true && entitet.isFlatInterent()!=false){
@@ -61,6 +57,16 @@ public class ObradaInternet extends Obrada<Internet> {
     @Override
     public List<Internet> getPodatci() {
          return session.createQuery("from Internet").list();
+    }
+
+    @Override
+    protected void kontrolaDelete() throws OperaterException {
+       
+    }
+
+    @Override
+    protected void nakonSpremanja() throws OperaterException {
+    
     }
     
 }

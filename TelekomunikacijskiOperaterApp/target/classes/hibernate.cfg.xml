@@ -45,13 +45,13 @@
         
         
         <!-- Ovdje navodimo naše mapirane klase -->
-         <mapping class="hr.teleoperaterapp.model.Operater" />
+        <mapping class="hr.teleoperaterapp.model.Operater" />
         <mapping class="hr.teleoperaterapp.model.MobilnaTarifa" />
         <mapping class="hr.teleoperaterapp.model.MobilniUredaj" />
         <mapping class="hr.teleoperaterapp.model.FiksniTelefon" />
         <mapping class="hr.teleoperaterapp.model.Tv" />
         <mapping class="hr.teleoperaterapp.model.Internet" />
-         <mapping class="hr.teleoperaterapp.model.Korisnik" />
+        <mapping class="hr.teleoperaterapp.model.Korisnik" />
          
          
         

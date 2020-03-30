@@ -35,10 +35,7 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
       
     }
 
-    @Override
-    protected void kontrolaSave() throws OperaterException {
-        
-    }
+  
 
     private void kontrolaCijena() throws OperaterException{
         if(entitet.getCijena()==0){
@@ -67,6 +64,16 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
     @Override
     public List<MobilniUredaj> getPodatci() {
         return session.createQuery("from MobilniUredaj").list();
+    }
+
+    @Override
+    protected void kontrolaDelete() throws OperaterException {
+        
+    }
+
+    @Override
+    protected void nakonSpremanja() throws OperaterException {
+        
     }
     
 }

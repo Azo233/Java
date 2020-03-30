@@ -5,13 +5,13 @@
  */
 package hr.teleoperaterapp.util;
 
-import hr.teleoperaterapp.controller.ObradaMobilnaTarifa;
-import hr.teleoperaterapp.controller.ObradaMobilniUredaj;
 import hr.teleoperaterapp.controller.ObradaFiksniTelefon;
 import hr.teleoperaterapp.controller.ObradaInternet;
-import hr.teleoperaterapp.controller.ObradaTv;
 import hr.teleoperaterapp.controller.ObradaKorisnik;
+import hr.teleoperaterapp.controller.ObradaMobilnaTarifa;
+import hr.teleoperaterapp.controller.ObradaMobilniUredaj;
 import hr.teleoperaterapp.controller.ObradaOperater;
+import hr.teleoperaterapp.controller.ObradaTv;
 import hr.teleoperaterapp.model.FiksniTelefon;
 import hr.teleoperaterapp.model.Internet;
 import hr.teleoperaterapp.model.Korisnik;
@@ -20,6 +20,9 @@ import hr.teleoperaterapp.model.MobilniUredaj;
 import hr.teleoperaterapp.model.Operater;
 import hr.teleoperaterapp.model.Tv;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -28,33 +31,74 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Pomocno {
     
+    public static Operater LOGIRAN;
+    
+       private final static DecimalFormat df = df();
+    
+    
+    
      public static String getNazivAplikacije(){
         return "Telekomunikacijski Operater App";
+        
     }
      
-    public static void pocetniInsert(){
+   
+     
+        public static void pocetniInsert(){
+            
+            
         
-        
-        Operater o = new Operater();
+      Operater o = new Operater();
         o.setEmail("azinic@gmail.com");
+        o.setIme("Andrija");
+        o.setPrezime("Azinić");
         o.setLozinka(BCrypt.hashpw("a", BCrypt.gensalt()));
         
         
         ObradaOperater obradaOperater = new ObradaOperater(o);
         try {
             obradaOperater.create();
-        } catch (OperaterException op) {
-            System.out.println(op.getPoruka());
+        } catch (OperaterException eo) {
+            System.out.println(eo.getPoruka());
+        }
+        }
+        
+        
+        
+        
+           
+        
+        public static String getFormatCijelogBroja(long i){
+        //https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
+        DecimalFormat dfCijeliBroj = new DecimalFormat("#");
+        return dfCijeliBroj.format(i);
+    }
+     
+    public static int getCijeliBrojIzStringa(String s){
+         try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return 0;
         }
     }
     
+     public static String getFormatDecimalniBroj(BigDecimal b){
+       
+        return df.format(b);
+    }
     
+     public static BigDecimal getDecimalniBrojIzStringa(String s){
+        try {
+            return new BigDecimal(df.parse(s).doubleValue());
+        } catch (Exception e) {
+            return BigDecimal.ZERO;
+        }
+     } 
         
         
         
-          
-          
-         
+        
+
     
     public static boolean isOibValjan(String oib) {
         
@@ -87,6 +131,14 @@ public class Pomocno {
             kontrolni = 0;
 
         return kontrolni == Integer.parseInt(oib.substring(10));
+    }
+
+    private static DecimalFormat df() {
+       NumberFormat nf = NumberFormat.
+                getNumberInstance(new Locale("hr","HR"));
+         DecimalFormat dfl = (DecimalFormat) nf;
+         dfl.applyPattern("#,###.00");
+    return dfl;
     }
     
 }

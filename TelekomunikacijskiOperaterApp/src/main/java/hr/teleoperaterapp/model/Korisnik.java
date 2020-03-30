@@ -22,7 +22,7 @@ public class Korisnik extends Entitet {
     
     private String ime;
     private String prezime;
-    private String Oib;
+    private String oib;
     
     @ManyToOne
     private  MobilnaTarifa mobilnatarifa;
@@ -52,12 +52,14 @@ public class Korisnik extends Entitet {
     }
 
     public String getOib() {
-        return Oib;
+        return oib;
     }
 
-    public void setOib(String Oib) {
-        this.Oib = Oib;
+    public void setOib(String oib) {
+        this.oib = oib;
     }
+
+    
 
     public MobilnaTarifa getMobilnatarifa() {
         return mobilnatarifa;

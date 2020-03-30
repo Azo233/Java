@@ -5,6 +5,7 @@
  */
 package hr.teleoperaterapp.view;
 
+import hr.teleoperaterapp.view.Autorizacija;
 import hr.teleoperaterapp.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -60,6 +61,7 @@ public class SplashScreen extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     

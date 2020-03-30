@@ -21,11 +21,20 @@ public abstract class Obrada<X> {
     protected Session session;
     protected abstract void kontrolaCreate() throws OperaterException;
     protected abstract void kontrolaUpdate() throws OperaterException;
-    protected abstract void kontrolaSave () throws OperaterException;
+    protected abstract void kontrolaDelete() throws OperaterException;
     public abstract List<X> getPodatci();
-
-    public Obrada() {
+    protected abstract void nakonSpremanja() throws OperaterException;
+    
+    public X getEntitet() {
+        return entitet;
+    }
+    
+     public Obrada() {
         session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public void setEntitet(X entitet) {
+        this.entitet = entitet;
     }
 
     
@@ -35,33 +44,54 @@ public abstract class Obrada<X> {
         this.entitet=entitet;
         
     }
+   
     
-     public X create() throws OperaterException{
+    public X create() throws OperaterException{
+        System.out.println(entitet);
         kontrolaCreate();
-         return save();
+        save();
+        nakonSpremanja();
+        return entitet;
+    }
+    
+    
+    
+     public void createAll(List<X> lista) throws OperaterException{
+    
+        session.beginTransaction();
+        for(X sl : lista){
+            this.entitet=sl;
+            kontrolaCreate();
+            session.save(sl);
+            nakonSpremanja();
+        }
+        session.getTransaction().commit();
+        
+        
     }
     
     public X update() throws OperaterException{
        kontrolaUpdate();
-        return save ();
+        save();
+        nakonSpremanja();
+        return entitet;
     }
     
-    public boolean Delete() throws OperaterException{
+    public boolean delete() throws OperaterException{
         
-        kontrolaCreate();
+        kontrolaDelete();
         session.beginTransaction();
         session.delete(entitet);
         session.getTransaction().commit();
-      
         return true;
         
     }
     
-    private X save(){
-        session.beginTransaction();
+    private void  save(){
+         session.beginTransaction();
         session.save(entitet);
         session.getTransaction().commit();
-        return entitet;
+        
     }
 
    
