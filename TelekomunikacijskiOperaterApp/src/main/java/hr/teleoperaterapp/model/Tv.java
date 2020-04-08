@@ -67,7 +67,7 @@ public class Tv extends Entitet{
     
    @Override
     public String toString() {
-        // nešto što ne morate raditi
+        
         if(naziv==null){
             return "";
         }

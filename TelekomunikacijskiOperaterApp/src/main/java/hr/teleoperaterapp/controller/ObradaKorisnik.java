@@ -14,18 +14,25 @@ import java.util.List;
 
 
 
-public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
+public class ObradaKorisnik extends Obrada<Korisnik> {
 
     
-    public ObradaKorisnik(X entitet) {
-        super(entitet);
+    public ObradaKorisnik(Korisnik korisnik){
+        super(korisnik);
     }
+
+    public ObradaKorisnik() {
+    }
+    
+    
+    
     
      @Override
     protected void kontrolaCreate() throws OperaterException {
         kontrolaIme();
         kontrolaPrezime();
         kontrolaOib();
+        
         
     }
 
@@ -56,8 +63,16 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
     }
 
     @Override
-    public List<X> getPodatci() {
+    public List<Korisnik> getPodaci() {
          return session.createQuery("from Korisnik").list();
+    }
+    
+    public List<Korisnik> getPodaci(String uvjet){
+        return session.createQuery("from Korisnik k "
+                + " where concat(k.ime, ' ', k.prezime) like :uvjet "
+                + " or concat(k.prezime, ' ', k.ime) like :uvjet ")
+                .setParameter("uvjet", "%" + uvjet + "%")
+                .setMaxResults(20).list();
     }
 
     @Override
@@ -71,6 +86,10 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
     }
 
    
+        
+    }
+
+   
     
 
    
@@ -78,7 +97,7 @@ public class ObradaKorisnik<X extends Korisnik>extends Obrada<X> {
    
 
    
-    }
+    
 
    
 

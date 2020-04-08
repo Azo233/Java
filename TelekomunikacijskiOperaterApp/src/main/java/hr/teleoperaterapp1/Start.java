@@ -26,10 +26,9 @@ public class Start {
     public Start(){
         
        //HibernateUtil.getSessionFactory().openSession();
-     
        //Pomocno.pocetniInsert();
        new SplashScreen().setVisible(true);
-       
+       //Pomocno.dodajPolaznika(1000);
          
      
         

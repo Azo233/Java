@@ -22,7 +22,7 @@ public abstract class Obrada<X> {
     protected abstract void kontrolaCreate() throws OperaterException;
     protected abstract void kontrolaUpdate() throws OperaterException;
     protected abstract void kontrolaDelete() throws OperaterException;
-    public abstract List<X> getPodatci();
+    public abstract List<X> getPodaci();
     protected abstract void nakonSpremanja() throws OperaterException;
     
     public X getEntitet() {

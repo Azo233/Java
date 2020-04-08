@@ -25,7 +25,7 @@ public class ObradaTv extends Obrada<Tv> {
     }
     
     @Override
-    public List<Tv> getPodatci() {
+    public List<Tv> getPodaci() {
          return session.createQuery("from Tv").list();
     }
     

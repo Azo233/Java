@@ -8,6 +8,7 @@ package hr.teleoperaterapp.view;
 
 import hr.teleoperaterapp.controller.ObradaOperater;
 import hr.teleoperaterapp.model.Operater;
+import hr.teleoperaterapp.util.Pomocno;
 import hr.teleoperaterapp.view.Izbornik;
 import hr.teleoperaterapp.view.Izbornik;
 import javax.swing.JOptionPane;
@@ -37,7 +38,7 @@ public class Autorizacija extends javax.swing.JFrame {
         pswLozinka = new javax.swing.JPasswordField();
         btnAutoriziraj1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setText("Email");
@@ -121,7 +122,7 @@ public class Autorizacija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Greška, ponovite");
             return;
         }
-        
+        Pomocno.LOGIRAN=o;
        new Izbornik().setVisible(true);
        dispose();
 

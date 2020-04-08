@@ -5,6 +5,7 @@
  */
 package hr.teleoperaterapp.util;
 
+import com.google.gson.Gson;
 import hr.teleoperaterapp.controller.ObradaFiksniTelefon;
 import hr.teleoperaterapp.controller.ObradaInternet;
 import hr.teleoperaterapp.controller.ObradaKorisnik;
@@ -18,11 +19,21 @@ import hr.teleoperaterapp.model.Korisnik;
 import hr.teleoperaterapp.model.MobilnaTarifa;
 import hr.teleoperaterapp.model.MobilniUredaj;
 import hr.teleoperaterapp.model.Operater;
+import hr.teleoperaterapp.model.Osoba;
 import hr.teleoperaterapp.model.Tv;
+import hr.teleoperaterapp.view.ViewKorisnik;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import net.bytebuddy.description.method.MethodDescription.TypeToken;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -139,6 +150,56 @@ public class Pomocno {
          DecimalFormat dfl = (DecimalFormat) nf;
          dfl.applyPattern("#,###.00");
     return dfl;
+    }
+    
+     public static String getGenOIB() {
+        
+        try{
+        URL u = new URL("http://oib.itcentrala.com/oib-generator/");
+        InputStream in = u.openStream();
+            String s = new String(in.readAllBytes(), 
+                    StandardCharsets.UTF_8);
+           // System.out.println(s);
+            int pocIndex=s.indexOf("<div class=\"oib\"><span>HR</span>")+32;
+            // Napredniji rad s html je HTMLCleaner (maven) i pojam xpath
+            return s.substring(pocIndex,pocIndex+11);
+        }catch(Exception e){
+            return "";
+        }
+        
+    }
+
+    public static Osoba getgenIP() {
+        try {
+        Gson gson = new Gson(); 
+        Type userListType = new com.google.gson.reflect.TypeToken<ArrayList<Osoba>>(){}.getType();
+        URL url = new URL("https://vit.hr/GIP/API/1/json/prvaSlovaVelika");
+        InputStreamReader reader = new InputStreamReader(url.openStream());
+        List<Osoba> lista=gson.fromJson(reader, userListType);;
+        return lista.get(0);
+         } 
+        catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    public static void dodajOsobu(int ukupno){
+        ObradaKorisnik ok=new ObradaKorisnik();
+        Korisnik k;
+        Osoba o;
+        for(int i=0;i<ukupno;i++){
+            k= new Korisnik();
+            o=getgenIP();
+            k.setIme(o.getIme());
+            k.setPrezime(o.getPrezime());
+            k.setOib(getGenOIB());
+            try {
+                ok.setEntitet(k);
+                ok.create();
+            } catch (Exception e) {
+            }
+        }
     }
     
 }

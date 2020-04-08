@@ -5,6 +5,7 @@
  */
 package hr.teleoperaterapp.model;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,34 +21,57 @@ public class Internet extends Entitet
 {
     
    
-    public boolean FlatInterent;
-    public boolean PokucniInternet;
-    private int cijena;
+    private String naziv;
+    private Boolean FlatInterent;
+    private Boolean PokucniInternet;
+    private BigDecimal cijena;
 
-    public boolean isFlatInterent() {
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public Boolean getFlatInterent() {
         return FlatInterent;
     }
 
-    public void setFlatInterent(boolean FlatInterent) {
+    public void setFlatInterent(Boolean FlatInterent) {
         this.FlatInterent = FlatInterent;
     }
 
-    public boolean isPokucniInternet() {
+    public Boolean getPokucniInternet() {
         return PokucniInternet;
     }
 
-    public void setPokucniInternet(boolean PokucniInternet) {
+    public void setPokucniInternet(Boolean PokucniInternet) {
         this.PokucniInternet = PokucniInternet;
     }
 
-    public int getCijena() {
+    public BigDecimal getCijena() {
         return cijena;
     }
 
-    public void setCijena(int cijena) {
+    public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
 
+  
+
+   
+@Override
+    public String toString() {
+        // nešto što ne morate raditi
+        if(naziv==null){
+            return "";
+        }
+        if(naziv.length()>20){
+            return naziv.substring(0,17) + "...";
+        }
+        return naziv;
+    }
     
     
         

@@ -20,26 +20,28 @@ public class ObradaFiksniTelefon extends Obrada<FiksniTelefon>{
     public ObradaFiksniTelefon(FiksniTelefon entitet) {
         super(entitet);
     }
+
+    public ObradaFiksniTelefon() {
+    }
     
-   
-    
-    
+
 
     @Override
     protected void kontrolaCreate() throws OperaterException {
        kontrolaCijena();
        kontrolaMin();
+       kontrolaIstiNaziv();
     }
 
     @Override
     protected void kontrolaUpdate() throws OperaterException{
-      
+      kontrolaDuzinaNaziv();
     }
 
    
 
     private void kontrolaCijena()  throws OperaterException{
-        if(entitet.getCijena()==0){
+        if(entitet.getCijena()==null){
             throw new OperaterException("Cijena obavezna");
         }
         
@@ -53,7 +55,7 @@ public class ObradaFiksniTelefon extends Obrada<FiksniTelefon>{
     }
 
     @Override
-    public List<FiksniTelefon> getPodatci() {
+    public List<FiksniTelefon> getPodaci() {
          return session.createQuery("from FiksniTelefon").list();
     }
 
@@ -65,6 +67,27 @@ public class ObradaFiksniTelefon extends Obrada<FiksniTelefon>{
     @Override
     protected void nakonSpremanja() throws OperaterException {
       
+    }
+
+    private void kontrolaIstiNaziv() throws OperaterException {
+       
+         Long ukupno = (Long)session
+            .createQuery(" select count(f) from FiksniTelefon f "
+                    + " where f.naziv=:naziv")
+              .setParameter("naziv", entitet.getNaziv())
+              .uniqueResult();
+      if(ukupno>0){
+          throw  new OperaterException("Naziv postoji u bazi, odaberite drugi");
+      }  
+        
+    }
+
+    private void kontrolaDuzinaNaziv() throws OperaterException {
+        
+        if(entitet.getNaziv().length()>50){
+          throw new OperaterException("Naziv mora biti manji od 50 znakova");
+      }  
+       
     }
 
     

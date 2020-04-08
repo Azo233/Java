@@ -20,25 +20,29 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
         super(entitet);
     }
 
+    public ObradaMobilniUredaj() {
+        
+    }
     
-    
+  
+
     @Override
     protected void kontrolaCreate() throws OperaterException {
+        kontrolaNaziv();
         kontrolaCijena();
-        kontrolaBrand();
         kontrolaOs();
-       
+        kontrolaIstiNaziv();
     }
 
     @Override
     protected void kontrolaUpdate() throws OperaterException {
-      
+      kontrolaDuzinaNaziv();
     }
 
   
 
     private void kontrolaCijena() throws OperaterException{
-        if(entitet.getCijena()==0){
+        if(entitet.getCijena()==null){
             throw new OperaterException("Cijena obavezna");
         }
         
@@ -53,16 +57,16 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
         }
     }
 
-    private void kontrolaBrand() throws OperaterException{
+    private void kontrolaNaziv() throws OperaterException{
         
-       if(entitet.getBrand().length()>20){
+       if(entitet.getNaziv().length()>20){
             throw new OperaterException("Ime mora imati manje od 20 znakova");
         }
         
     }
 
     @Override
-    public List<MobilniUredaj> getPodatci() {
+    public List<MobilniUredaj> getPodaci() {
         return session.createQuery("from MobilniUredaj").list();
     }
 
@@ -75,5 +79,25 @@ public class ObradaMobilniUredaj extends Obrada<MobilniUredaj> {
     protected void nakonSpremanja() throws OperaterException {
         
     }
-    
+
+    private void kontrolaIstiNaziv() throws OperaterException {
+       Long ukupno = (Long)session
+            .createQuery(" select count(m) from MobilniUredaj m "
+                    + " where m.naziv=:naziv")
+              .setParameter("naziv", entitet.getNaziv())
+              .uniqueResult();
+      if(ukupno>0){
+          throw  new OperaterException("Naziv postoji u bazi, odaberite drugi");
+      }  
+    }
+
+    private void kontrolaDuzinaNaziv() throws OperaterException {
+            if(entitet.getNaziv().length()>50){
+          throw new OperaterException("Naziv mora biti manji od 50 znakova");
+    }
+    }
 }
+
+   
+    
+

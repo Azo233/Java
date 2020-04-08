@@ -5,10 +5,12 @@
  */
 package hr.teleoperaterapp.view;
 
+
 import hr.teleoperaterapp.util.HibernateUtil;
 import hr.teleoperaterapp.util.Pomocno;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 /**
  *
@@ -31,7 +33,8 @@ public class Izbornik extends javax.swing.JFrame {
         Vrijeme v = new Vrijeme();
         v.start();
     }
-    
+
+   
     
     private class Vrijeme extends Thread{
 
@@ -65,6 +68,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAplikacija = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -73,7 +77,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jToolBar1.setRollover(true);
@@ -90,6 +94,14 @@ public class Izbornik extends javax.swing.JFrame {
             }
         });
         jmAplikacija.add(jMenuItem7);
+
+        jMenuItem8.setText("Natrag");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jmAplikacija.add(jMenuItem8);
 
         jMenuBar1.add(jmAplikacija);
 
@@ -191,8 +203,17 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new ViewTv().setVisible(true);
+
+        new ViewTv().setVisible(true);   
+ 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        HibernateUtil.getSessionFactory().close();
+        dispose();
+        new Autorizacija().setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +233,7 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmAplikacija;
     private javax.swing.JLabel lblVrijeme;

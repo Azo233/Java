@@ -1,5 +1,6 @@
 package hr.teleoperaterapp.model;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ import javax.persistence.Id;
 public class MobilnaTarifa extends Entitet {
     
     private String naziv;
-    private int cijena;
+    private BigDecimal cijena;
     private int podatkovi_promet;
     private int sms_min;
 
@@ -31,11 +32,11 @@ public class MobilnaTarifa extends Entitet {
         this.naziv = naziv;
     }
 
-    public int getCijena() {
+    public BigDecimal getCijena() {
         return cijena;
     }
 
-    public void setCijena(int cijena) {
+    public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
 
@@ -55,7 +56,17 @@ public class MobilnaTarifa extends Entitet {
         this.sms_min = sms_min;
     }
 
-    
+     @Override
+    public String toString() {
+        // nešto što ne morate raditi
+        if(naziv==null){
+            return "";
+        }
+        if(naziv.length()>20){
+            return naziv.substring(0,17) + "...";
+        }
+        return naziv;
+    }
     
     
     

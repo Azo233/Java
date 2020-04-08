@@ -20,42 +20,50 @@ public class ObradaInternet extends Obrada<Internet> {
         super(entitet);
     }
 
+    public ObradaInternet() {
+    }
+    
+    
+
     
     @Override
     protected void kontrolaCreate() throws OperaterException {
       kontolaFlatInternet();
       kontrolaPokucniInternet();
       kontrolaCijena();
+      kontrolaIstiNaziv();
         
     }
 
     @Override
     protected void kontrolaUpdate() throws OperaterException {
         
+        kontrolaDuzinaNaziv();
+        
     }
 
 
     private void kontolaFlatInternet() throws OperaterException{
-        if(entitet.isFlatInterent()!=true && entitet.isFlatInterent()!=false){
+        if(entitet.getFlatInterent()!=true && entitet.getFlatInterent()!=false){
             throw new OperaterException("Obavezno true ili false");
         }
         
     }
 
     private void kontrolaPokucniInternet() throws OperaterException {
-        if(entitet.isPokucniInternet()!=true && entitet.isPokucniInternet()!=false){
+        if(entitet.getPokucniInternet()!=true && entitet.getPokucniInternet()!=false){
             throw new OperaterException("Obavezno true ili false");
         }
     }
 
     private void kontrolaCijena() throws OperaterException{
-        if (entitet.getCijena()==0){
+        if (entitet.getCijena()==null){
             throw new OperaterException("Cijena obavezna");
         }
     }
 
     @Override
-    public List<Internet> getPodatci() {
+    public List<Internet> getPodaci() {
          return session.createQuery("from Internet").list();
     }
 
@@ -67,6 +75,27 @@ public class ObradaInternet extends Obrada<Internet> {
     @Override
     protected void nakonSpremanja() throws OperaterException {
     
+    }
+
+    private void kontrolaDuzinaNaziv() throws OperaterException {
+        
+         if(entitet.getNaziv().length()>50){
+          throw new OperaterException("Naziv mora biti manji od 50 znakova");
+      }  
+        
+    }
+
+    private void kontrolaIstiNaziv() throws OperaterException {
+     
+        Long ukupno = (Long)session
+            .createQuery(" select count(i) from Internet i "
+                    + " where i.naziv=:naziv")
+              .setParameter("naziv", entitet.getNaziv())
+              .uniqueResult();
+      if(ukupno>0){
+          throw  new OperaterException("Naziv postoji u bazi, odaberite drugi");
+      }  
+        
     }
     
 }

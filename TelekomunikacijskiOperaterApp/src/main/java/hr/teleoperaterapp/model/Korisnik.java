@@ -1,5 +1,6 @@
 package hr.teleoperaterapp.model;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Korisnik extends Entitet {
     private String ime;
     private String prezime;
     private String oib;
+    private BigDecimal Troskovi;
     
     @ManyToOne
     private  MobilnaTarifa mobilnatarifa;
@@ -51,7 +53,7 @@ public class Korisnik extends Entitet {
         this.prezime = prezime;
     }
 
-    public String getOib() {
+      public String getOib() {
         return oib;
     }
 
@@ -59,7 +61,6 @@ public class Korisnik extends Entitet {
         this.oib = oib;
     }
 
-    
 
     public MobilnaTarifa getMobilnatarifa() {
         return mobilnatarifa;
@@ -101,9 +102,25 @@ public class Korisnik extends Entitet {
         this.internet = internet;
     }
 
+    public BigDecimal getTroskovi() {
+        return Troskovi;
+    }
+
+    public void setTroskovi(BigDecimal Troskovi) {
+        this.Troskovi = Troskovi;
+    }
+
+    
+    
+    
+
    
     
 
+    @Override
+    public String toString() {
+        return prezime + " " + ime;
+    }
    
 
     

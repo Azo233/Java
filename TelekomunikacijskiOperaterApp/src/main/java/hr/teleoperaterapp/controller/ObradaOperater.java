@@ -52,7 +52,7 @@ public class ObradaOperater extends Obrada<Operater> {
    
     
     @Override
-    public List<Operater> getPodatci() {
+    public List<Operater> getPodaci() {
          return session.createQuery("from Operater").list();
     }
 
