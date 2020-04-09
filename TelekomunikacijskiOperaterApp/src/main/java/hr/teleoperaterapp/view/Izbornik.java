@@ -209,7 +209,7 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        HibernateUtil.getSessionFactory().close();
+       
         dispose();
         new Autorizacija().setVisible(true);
         

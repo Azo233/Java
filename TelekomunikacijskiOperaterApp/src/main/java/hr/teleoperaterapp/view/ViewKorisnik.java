@@ -126,6 +126,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
           obrada.getEntitet().setInternet(cmbInternet.getModel()
           .getElementAt(cmbInternet.getSelectedIndex()));
           
+          obrada.getEntitet().setTroskovi(Pomocno.getDecimalniBrojIzStringa(txtTroskovi.getText()));
           
          
       }
@@ -148,20 +149,21 @@ public class ViewKorisnik extends javax.swing.JFrame {
        
        
        private void IzracunajTrosak() {
+           
            List<BigDecimal> bigDecimalList= new ArrayList<>();
            
-           bigDecimalList.add(obrada.getEntitet().getFiksnitelefon().getCijena());
-           bigDecimalList.add(obrada.getEntitet().getMobilnatarifa().getCijena());
-           bigDecimalList.add(obrada.getEntitet().getTv().getCijena());
-           bigDecimalList.add(obrada.getEntitet().getInternet().getCijena());
+           bigDecimalList.add(((FiksniTelefon)cmbFiksniTelefon.getSelectedItem()).getCijena());
+           bigDecimalList.add(((MobilnaTarifa)cmbMobilnaTarifa.getSelectedItem()).getCijena());
+           bigDecimalList.add(((Tv)cmbTv.getSelectedItem()).getCijena());
+           bigDecimalList.add(((Internet)cmbInternet.getSelectedItem()).getCijena());
            
            
            BigDecimal dodaj= new BigDecimal(0);
            for (BigDecimal value : bigDecimalList){
               dodaj= dodaj.add(new BigDecimal(value.floatValue()));
            }
-           System.out.println(dodaj);
-       
+           System.out.printf("%.2f",dodaj);
+       txtTroskovi.setText(Pomocno.getFormatDecimalniBroj(dodaj));
        
 
     }
@@ -250,9 +252,6 @@ public class ViewKorisnik extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstPodaci = new javax.swing.JList<>();
-        cmbMobilniUredaj = new javax.swing.JComboBox<>();
         cmbMobilnaTarifa = new javax.swing.JComboBox<>();
         cmbFiksniTelefon = new javax.swing.JComboBox<>();
         cmbTv = new javax.swing.JComboBox<>();
@@ -260,7 +259,11 @@ public class ViewKorisnik extends javax.swing.JFrame {
         btnTrazi = new javax.swing.JButton();
         txtUvjet = new javax.swing.JTextField();
         Troškovi = new javax.swing.JLabel();
-        txtTroškovi = new javax.swing.JTextField();
+        txtTroskovi = new javax.swing.JTextField();
+        cmbMobilniUredaj = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstPodaci = new javax.swing.JList<>();
+        jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -303,12 +306,29 @@ public class ViewKorisnik extends javax.swing.JFrame {
 
         jLabel8.setText("Internet");
 
-        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstPodaciValueChanged(evt);
+        cmbMobilnaTarifa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMobilnaTarifaActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(lstPodaci);
+
+        cmbFiksniTelefon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFiksniTelefonActionPerformed(evt);
+            }
+        });
+
+        cmbTv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTvActionPerformed(evt);
+            }
+        });
+
+        cmbInternet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbInternetActionPerformed(evt);
+            }
+        });
 
         btnTrazi.setText("Traži");
         btnTrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -325,11 +345,18 @@ public class ViewKorisnik extends javax.swing.JFrame {
 
         Troškovi.setText("Troškovi");
 
-        txtTroškovi.addActionListener(new java.awt.event.ActionListener() {
+        txtTroskovi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTroškoviActionPerformed(evt);
+                txtTroskoviActionPerformed(evt);
             }
         });
+
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -339,22 +366,26 @@ public class ViewKorisnik extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtUvjet)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTrazi)))
-                        .addGap(18, 18, 18)
+                                .addComponent(btnTrazi)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIme, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(txtPrezime, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(txtOib, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                            .addComponent(cmbMobilniUredaj, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbMobilnaTarifa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbFiksniTelefon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbTv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbInternet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTroskovi)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -367,7 +398,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(Troškovi))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtTroškovi)))
+                            .addComponent(cmbMobilniUredaj, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(btnDodaj)
@@ -375,7 +406,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
                         .addComponent(btnPromjeni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnObrisi)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,12 +418,12 @@ public class ViewKorisnik extends javax.swing.JFrame {
                         .addComponent(btnTrazi)
                         .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(14, 14, 14)
                         .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -400,9 +431,9 @@ public class ViewKorisnik extends javax.swing.JFrame {
                         .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(10, 10, 10)
                         .addComponent(cmbMobilniUredaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmbMobilnaTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,10 +452,10 @@ public class ViewKorisnik extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Troškovi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTroškovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 27, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTroskovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
                     .addComponent(btnPromjeni)
@@ -479,17 +510,6 @@ public class ViewKorisnik extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
-    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
-       if (evt.getValueIsAdjusting()) {
-            return;
-        }
-        obrada.setEntitet(lstPodaci.getSelectedValue());
-        if (obrada.getEntitet() == null) {
-            return;
-        }
-        postaviVrijednosti();
-    }//GEN-LAST:event_lstPodaciValueChanged
-
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
 
          ucitaj();
@@ -501,9 +521,36 @@ public class ViewKorisnik extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUvjetKeyPressed
 
-    private void txtTroškoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTroškoviActionPerformed
+    private void txtTroskoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTroskoviActionPerformed
        
-    }//GEN-LAST:event_txtTroškoviActionPerformed
+    }//GEN-LAST:event_txtTroskoviActionPerformed
+
+    private void cmbMobilnaTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMobilnaTarifaActionPerformed
+        IzracunajTrosak();
+    }//GEN-LAST:event_cmbMobilnaTarifaActionPerformed
+
+    private void cmbFiksniTelefonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiksniTelefonActionPerformed
+        IzracunajTrosak();
+    }//GEN-LAST:event_cmbFiksniTelefonActionPerformed
+
+    private void cmbTvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTvActionPerformed
+        IzracunajTrosak();
+    }//GEN-LAST:event_cmbTvActionPerformed
+
+    private void cmbInternetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbInternetActionPerformed
+       IzracunajTrosak();
+    }//GEN-LAST:event_cmbInternetActionPerformed
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+        if (obrada.getEntitet() == null) {
+            return;
+        }
+        postaviVrijednosti();
+    }//GEN-LAST:event_lstPodaciValueChanged
 
   
     
@@ -535,12 +582,13 @@ public class ViewKorisnik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Korisnik> lstPodaci;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtOib;
     private javax.swing.JTextField txtPrezime;
-    private javax.swing.JTextField txtTroškovi;
+    private javax.swing.JTextField txtTroskovi;
     private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
 

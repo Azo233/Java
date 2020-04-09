@@ -1,5 +1,6 @@
 hr\teleoperaterapp\controller\ObradaInternet.class
 hr\teleoperaterapp\model\MobilnaTarifa.class
+hr\teleoperaterapp\view\ViewKorisnik$10.class
 hr\teleoperaterapp\util\Pomocno$1.class
 hr\teleoperaterapp\view\ViewFiksniTelefon$1.class
 hr\teleoperaterapp\controller\ObradaFiksniTelefon.class
@@ -13,6 +14,7 @@ hr\teleoperaterapp\view\ViewKorisnik$4.class
 hr\teleoperaterapp\view\ViewFiksniTelefon$4.class
 hr\teleoperaterapp\view\ViewMobilnaTarifa.class
 hr\teleoperaterapp\model\Tv.class
+hr\teleoperaterapp\view\ViewKorisnik$8.class
 hr\teleoperaterapp\view\Izbornik$2.class
 hr\teleoperaterapp\view\ViewKorisnik$1.class
 hr\teleoperaterapp\view\Registracija.class
@@ -41,6 +43,7 @@ hr\teleoperaterapp\view\ViewMobilniUredaj$4.class
 hr\teleoperaterapp\model\FiksniTelefon.class
 hr\teleoperaterapp\view\Izbornik.class
 hr\teleoperaterapp\view\ViewInternet.class
+hr\teleoperaterapp\view\ViewKorisnik$9.class
 hr\teleoperaterapp\view\ViewInternet$3.class
 hr\teleoperaterapp\view\Autorizacija.class
 hr\teleoperaterapp\util\OperaterException.class
@@ -49,6 +52,7 @@ hr\teleoperaterapp\view\SplashScreen$Ucitavanje.class
 hr\teleoperaterapp\view\ViewKorisnik$3.class
 hr\teleoperaterapp\view\ViewMobilniUredaj$1.class
 hr\teleoperaterapp\view\ViewKorisnik$6.class
+hr\teleoperaterapp\view\ViewKorisnik$11.class
 hr\teleoperaterapp\view\ViewTv.class
 hr\teleoperaterapp\view\Izbornik$7.class
 hr\teleoperaterapp\view\ViewTv$2.class
