@@ -111,26 +111,24 @@ public class Autorizacija extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAutoriziraj1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoriziraj1ActionPerformed
+        new Registracija().setVisible(true);
+    }//GEN-LAST:event_btnAutoriziraj1ActionPerformed
+
     private void btnAutorizirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizirajActionPerformed
-         
-       ObradaOperater op= new ObradaOperater();
-        
+
+        ObradaOperater op= new ObradaOperater();
+
         Operater o= op.autoriziraj(txtEmail.getText().trim(),new String(pswLozinka.getPassword()));
-        
-         
+
         if(o==null){
             JOptionPane.showMessageDialog(null, "Greška, ponovite");
             return;
         }
         Pomocno.LOGIRAN=o;
-       new Izbornik().setVisible(true);
-       dispose();
-
+        new Izbornik().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnAutorizirajActionPerformed
-
-    private void btnAutoriziraj1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoriziraj1ActionPerformed
-       new Registracija().setVisible(true);
-    }//GEN-LAST:event_btnAutoriziraj1ActionPerformed
 
     
     

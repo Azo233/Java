@@ -72,7 +72,7 @@ public class ObradaKorisnik extends Obrada<Korisnik> {
                 + " where concat(k.ime, ' ', k.prezime) like :uvjet "
                 + " or concat(k.prezime, ' ', k.ime) like :uvjet ")
                 .setParameter("uvjet", "%" + uvjet + "%")
-                .setMaxResults(20).list();
+                .setMaxResults(50).list();
     }
 
     @Override
