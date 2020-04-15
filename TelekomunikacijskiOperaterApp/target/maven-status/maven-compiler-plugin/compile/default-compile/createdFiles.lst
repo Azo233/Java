@@ -24,7 +24,6 @@ hr\teleoperaterapp\util\HibernateUtil.class
 hr\teleoperaterapp\view\ViewMobilniUredaj$3.class
 hr\teleoperaterapp\view\ViewKorisnik$5.class
 hr\teleoperaterapp\view\Izbornik$6.class
-hr\teleoperaterapp\view\ViewTv$4.class
 hr\teleoperaterapp\view\Autorizacija$1.class
 hr\teleoperaterapp1\Start.class
 hr\teleoperaterapp\model\Internet.class
@@ -37,7 +36,6 @@ hr\teleoperaterapp\view\Izbornik$3.class
 hr\teleoperaterapp\view\ViewKorisnik$2.class
 hr\teleoperaterapp\view\SplashScreen.class
 hr\teleoperaterapp\controller\ObradaMobilniUredaj.class
-hr\teleoperaterapp\view\ViewTv$3.class
 hr\teleoperaterapp\view\ViewMobilnaTarifa$3.class
 hr\teleoperaterapp\view\ViewMobilniUredaj$4.class
 hr\teleoperaterapp\model\FiksniTelefon.class
@@ -55,7 +53,6 @@ hr\teleoperaterapp\view\ViewKorisnik$6.class
 hr\teleoperaterapp\view\ViewKorisnik$11.class
 hr\teleoperaterapp\view\ViewTv.class
 hr\teleoperaterapp\view\Izbornik$7.class
-hr\teleoperaterapp\view\ViewTv$2.class
 hr\teleoperaterapp\view\ViewMobilniUredaj.class
 hr\teleoperaterapp\view\Registracija$1.class
 hr\teleoperaterapp\view\Izbornik$4.class

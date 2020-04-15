@@ -26,6 +26,7 @@ public class Korisnik extends Entitet {
     private String oib;
     private BigDecimal troskovi;
     
+    
     @ManyToOne
     private  MobilnaTarifa mobilnatarifa;
     @ManyToOne
@@ -109,17 +110,6 @@ public class Korisnik extends Entitet {
     public void setTroskovi(BigDecimal Troskovi) {
         this.troskovi = Troskovi;
     }
-
-  
-
-    
-
-    
-    
-    
-
-   
-    
 
     @Override
     public String toString() {

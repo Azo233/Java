@@ -49,36 +49,11 @@ public class Pomocno {
     
     
      public static String getNazivAplikacije(){
-        return "Telekomunikacijski Operater App";
+        return "Telekomunikacijski Operater ";
         
     }
      
-   
-     
-        public static void pocetniInsert(){
-            
-            
-        
-      Operater o = new Operater();
-        o.setEmail("azinic@gmail.com");
-        o.setIme("Andrija");
-        o.setPrezime("Azinić");
-        o.setLozinka(BCrypt.hashpw("a", BCrypt.gensalt()));
-        
-        
-        ObradaOperater obradaOperater = new ObradaOperater(o);
-        try {
-            obradaOperater.create();
-        } catch (OperaterException eo) {
-            System.out.println(eo.getPoruka());
-        }
-        }
-        
-        
-        
-        
-           
-        
+
         public static String getFormatCijelogBroja(long i){
         //https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
         DecimalFormat dfCijeliBroj = new DecimalFormat("#");
@@ -201,5 +176,9 @@ public class Pomocno {
             }
         }
     }
+    
+    
+    
+     
     
 }

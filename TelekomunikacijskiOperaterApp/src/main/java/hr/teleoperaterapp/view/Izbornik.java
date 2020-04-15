@@ -85,9 +85,11 @@ public class Izbornik extends javax.swing.JFrame {
         lblVrijeme.setText("Vrijeme");
         jToolBar1.add(lblVrijeme);
 
+        jmAplikacija.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jmAplikacija.setText("Aplikacija");
 
         jMenuItem7.setText("Izlaz");
+        jMenuItem7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -96,6 +98,7 @@ public class Izbornik extends javax.swing.JFrame {
         jmAplikacija.add(jMenuItem7);
 
         jMenuItem8.setText("Natrag");
+        jMenuItem8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -105,9 +108,11 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jmAplikacija);
 
+        jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu2.setText("Programi");
 
         jMenuItem1.setText("Korisnik");
+        jMenuItem1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -116,6 +121,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Mobilni uredaj");
+        jMenuItem2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -124,6 +130,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Mobilna tarifa");
+        jMenuItem3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -132,6 +139,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Fiksni telefon");
+        jMenuItem4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -140,6 +148,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Internet");
+        jMenuItem5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -148,6 +157,7 @@ public class Izbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Tv");
+        jMenuItem6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -168,7 +178,7 @@ public class Izbornik extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 253, Short.MAX_VALUE)
+                .addGap(0, 251, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

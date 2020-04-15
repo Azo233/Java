@@ -28,7 +28,7 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
     public ViewMobilniUredaj() {
         initComponents();
         obrada=new ObradaMobilniUredaj();
-        ucitajMobilneTarife();
+        
         
         postInitComponents();
     }
@@ -39,13 +39,7 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
        
     }
      
-     private void ucitajMobilneTarife() {
-        DefaultComboBoxModel<MobilnaTarifa> m = new DefaultComboBoxModel<>();
-        new ObradaMobilnaTarifa().getPodaci().forEach(p->m.addElement(p));
-        cmbMobilnaTarifa.setModel(m);
-         
-         
-    }
+   
      
       private void ucitaj() {
        DefaultListModel<MobilniUredaj> t = new DefaultListModel<>();
@@ -58,8 +52,7 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
           obrada.getEntitet().setNaziv(txtBrand.getText());
           obrada.getEntitet().setOs(txtOs.getText());
           obrada.getEntitet().setCijena(Pomocno.getDecimalniBrojIzStringa(txtCijena.getText()));
-          obrada.getEntitet().setMobilnatarifa(cmbMobilnaTarifa.getModel()
-          .getElementAt(cmbMobilnaTarifa.getSelectedIndex()));
+          
 
       }
        
@@ -69,21 +62,10 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
           txtOs.setText(obrada.getEntitet().getOs());
           txtCijena.setText(Pomocno.getFormatDecimalniBroj(obrada.getEntitet().getCijena()));
           
-          postaviMobilnaTarinfa();
+         
       }
        
-       private void postaviMobilnaTarinfa(){
-           
-           ComboBoxModel<MobilnaTarifa> m = cmbMobilnaTarifa.getModel();
-        for(int i=0;i<m.getSize();i++){
-            if(m.getElementAt(i).getSifra().equals(
-                    obrada.getEntitet().getMobilnatarifa().getSifra())){
-               cmbMobilnaTarifa.setSelectedIndex(i);
-                break;
-            }
-        }
-           
-       }
+      
        
        
 
@@ -98,17 +80,15 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
-        btnDodaj = new javax.swing.JButton();
-        btnPromjeni = new javax.swing.JButton();
-        btnObrisi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
         txtOs = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtCijena = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cmbMobilnaTarifa = new javax.swing.JComboBox<>();
+        btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,27 +99,6 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstPodaci);
 
-        btnDodaj.setText("Dodaj");
-        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDodajActionPerformed(evt);
-            }
-        });
-
-        btnPromjeni.setText("Promijeni");
-        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPromjeniActionPerformed(evt);
-            }
-        });
-
-        btnObrisi.setText("Obriši");
-        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Brand");
 
         jLabel2.setText("Operativni sistem");
@@ -148,7 +107,29 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
 
         jLabel3.setText("Cijena");
 
-        jLabel4.setText("Mobilna Tarifa");
+        btnDodaj.setText("Dodaj");
+        btnDodaj.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,28 +141,25 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addComponent(txtBrand, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addComponent(txtOs, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCijena, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbMobilnaTarifa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtOs)
+                    .addComponent(txtCijena)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPromjeni)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBrand))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(btnDodaj)
-                .addGap(66, 66, 66)
-                .addComponent(btnPromjeni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(btnObrisi)
-                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,16 +173,11 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(11, 11, 11)
-                        .addComponent(cmbMobilnaTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDodaj)
-                    .addComponent(btnPromjeni)
-                    .addComponent(btnObrisi))
-                .addGap(19, 19, 19))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnObrisi)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni))))
+                .addContainerGap())
         );
 
         pack();
@@ -223,7 +196,7 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-         try {
+        try {
             obrada.setEntitet(new MobilniUredaj());
             ucitajVrijednosti();
             obrada.create();
@@ -251,7 +224,7 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-         if (obrada.getEntitet() == null) {
+        if (obrada.getEntitet() == null) {
             JOptionPane.showMessageDialog(null, "Prvo odaberite stavku");
             return;
         }
@@ -272,11 +245,9 @@ public class ViewMobilniUredaj extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
-    private javax.swing.JComboBox<MobilnaTarifa> cmbMobilnaTarifa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<MobilniUredaj> lstPodaci;
     private javax.swing.JTextField txtBrand;
