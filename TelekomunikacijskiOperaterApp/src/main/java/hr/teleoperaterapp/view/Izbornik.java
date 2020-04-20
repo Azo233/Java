@@ -6,10 +6,18 @@
 package hr.teleoperaterapp.view;
 
 
+import hr.teleoperaterapp.controller.ObradaKorisnik;
+import hr.teleoperaterapp.model.Korisnik;
 import hr.teleoperaterapp.util.HibernateUtil;
 import hr.teleoperaterapp.util.Pomocno;
+import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import javax.swing.ImageIcon;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 
 /**
@@ -32,6 +40,8 @@ public class Izbornik extends javax.swing.JFrame {
         
         Vrijeme v = new Vrijeme();
         v.start();
+        
+      
     }
 
    
@@ -53,6 +63,10 @@ public class Izbornik extends javax.swing.JFrame {
         
     }
     
+   
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +77,7 @@ public class Izbornik extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
+        jToolBar2 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAplikacija = new javax.swing.JMenu();
@@ -80,14 +94,22 @@ public class Izbornik extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jToolBar1.setRollover(true);
+        jToolBar2.setBackground(new java.awt.Color(51, 153, 255));
+        jToolBar2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jToolBar2.setForeground(new java.awt.Color(51, 153, 255));
+        jToolBar2.setRollover(true);
 
+        lblVrijeme.setBackground(new java.awt.Color(51, 153, 255));
         lblVrijeme.setText("Vrijeme");
-        jToolBar1.add(lblVrijeme);
+        jToolBar2.add(lblVrijeme);
 
-        jmAplikacija.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setBackground(new java.awt.Color(51, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jmAplikacija.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jmAplikacija.setText("Aplikacija");
 
+        jMenuItem7.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem7.setText("Izlaz");
         jMenuItem7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +119,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jmAplikacija.add(jMenuItem7);
 
+        jMenuItem8.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem8.setText("Natrag");
         jMenuItem8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +131,10 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jmAplikacija);
 
-        jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jMenu2.setText("Programi");
 
+        jMenuItem1.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem1.setText("Korisnik");
         jMenuItem1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +144,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem2.setText("Mobilni uredaj");
         jMenuItem2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +154,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
+        jMenuItem3.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem3.setText("Mobilna tarifa");
         jMenuItem3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +164,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem4.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem4.setText("Fiksni telefon");
         jMenuItem4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +174,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
+        jMenuItem5.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem5.setText("Internet");
         jMenuItem5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +184,7 @@ public class Izbornik extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem6.setBackground(new java.awt.Color(51, 153, 255));
         jMenuItem6.setText("Tv");
         jMenuItem6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -173,13 +202,13 @@ public class Izbornik extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 251, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 230, Short.MAX_VALUE)
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -244,7 +273,7 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenu jmAplikacija;
     private javax.swing.JLabel lblVrijeme;
     // End of variables declaration//GEN-END:variables
