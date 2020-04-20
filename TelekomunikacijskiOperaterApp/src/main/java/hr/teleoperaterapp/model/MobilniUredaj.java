@@ -1,7 +1,10 @@
 package hr.teleoperaterapp.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import javax.persistence.OneToOne;
 
@@ -24,6 +27,10 @@ public class MobilniUredaj extends Entitet {
     private String os;
     @OneToOne
     private  MobilnaTarifa mobilnatarifa;
+    
+    @OneToMany(mappedBy = "mobilniuredaj")
+    private List<Korisnik> korisnici= new ArrayList<>();
+    
 
     public String getNaziv() {
         return naziv;
@@ -57,6 +64,14 @@ public class MobilniUredaj extends Entitet {
 
     public void setMobilnatarifa(MobilnaTarifa mobilnatarifa) {
         this.mobilnatarifa = mobilnatarifa;
+    }
+
+    public List<Korisnik> getKorisnici() {
+        return korisnici;
+    }
+
+    public void setKorisnici(List<Korisnik> korisnici) {
+        this.korisnici = korisnici;
     }
 
     

@@ -27,7 +27,7 @@ public class Start {
         
        //HibernateUtil.getSessionFactory().openSession();
        //Pomocno.pocetniInsert();
-       new SplashScreen().setVisible(true);
+      new SplashScreen().setVisible(true);
        //Pomocno.dodajOsobu(50);
          
      
